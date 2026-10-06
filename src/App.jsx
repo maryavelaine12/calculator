@@ -33,7 +33,7 @@ function App() {
     <div className='App'>
       {/* Requirement 1: Header */}
       <div className='Header'>
-        Calculator of James Marc Infante - IT3A
+        Calculator of Mary Avelaine Buenaventura - IT3A
       </div>
 
 
