@@ -2,20 +2,18 @@ import { useState } from 'react'
 import './App.css'
 
 
-
-
-function CalcDisplay({dispValue}) {
+function CalcDisplay({ dispValue }) {
   return (
     <div className='CalcDisplay'>
-      {dispValue}
+      <div className='main-value'>{dispValue}</div>
     </div>
   )
 }
 
 
-function CalcButtons({label, buttonClassName="CalcButton", onClick}) {
+function CalcButton({ label, buttonClassName = "CalcButton", onClick }) {
   return (
-    <button className={buttonClassName} onClick={onClick}>
+    <button className={buttonClassName} onClick={() => onClick(label)}>
       {label}
     </button>
   )
@@ -23,59 +21,48 @@ function CalcButtons({label, buttonClassName="CalcButton", onClick}) {
 
 
 function App() {
+  const [disp, setDisp] = useState('0');
 
 
-  const [dispValue, setDispValue] = useState('0')
-
-
-
-
-  const onClickHandler = (e) => {
-    e.preventDefault()
-    const value = e.target.innerHTML;
-
-
-    if (value === 'CLR') {
-      setDispValue('0')
-    }
-    else if (value === '=') {
-      alert(dispValue)
-    }
-    else {
-      if (dispValue === '0') {
-        setDispValue(value)
-      }
-      else {
-        setDispValue(dispValue + value)
-      }
-    }
+  const handleButtonClick = (label) => {
+    setDisp(label); 
   }
 
 
   return (
     <div className='App'>
+      {/* Requirement 1: Header */}
       <div className='Header'>
-        Calculator of Mary Avelaine Buenaventura - DA3A
+        Calculator of James Marc Infante - IT3A
       </div>
+
+
       <div className='Calculator'>
-        <CalcDisplay dispValue= {dispValue} />  
+        <CalcDisplay dispValue={disp} />
+        
         <div className='CalcButtons'>
-          <CalcButtons label={'7'} onClick= {onClickHandler} />
-          <CalcButtons label={'8'} onClick= {onClickHandler} />
-          <CalcButtons label={'9'} onClick= {onClickHandler} />
-          <CalcButtons label={'÷'} onClick= {onClickHandler} />
-          <CalcButtons label={'4'} onClick= {onClickHandler} />
-          <CalcButtons label={'5'} onClick= {onClickHandler} />
-          <CalcButtons label={'6'} onClick= {onClickHandler} />
-          <CalcButtons label={'x'} onClick= {onClickHandler} />
-          <CalcButtons label={'1'} onClick= {onClickHandler} />
-          <CalcButtons label={'2'} onClick= {onClickHandler} />
-          <CalcButtons label={'3'} onClick= {onClickHandler} />
-          <CalcButtons label={'-'} onClick= {onClickHandler} />
-          <CalcButtons label={'CLR'} buttonClassName = "ClearButton" onClick = {onClickHandler} />
-          <CalcButtons label={'0'} onClick= {onClickHandler} />
-          <CalcButtons label={'='} onClick= {onClickHandler} />
-          <CalcButtons label={'+'} onClick= {onClickHandler} />
+          <CalcButton label={'7'} onClick={handleButtonClick} />
+          <CalcButton label={'8'} onClick={handleButtonClick} />
+          <CalcButton label={'9'} onClick={handleButtonClick} />
+          <CalcButton label={'÷'} buttonClassName="CalcButton OperatorButton" onClick={handleButtonClick} />
+
+
+          <CalcButton label={'4'} onClick={handleButtonClick} />
+          <CalcButton label={'5'} onClick={handleButtonClick} />
+          <CalcButton label={'6'} onClick={handleButtonClick} />
+          <CalcButton label={'*'} buttonClassName="CalcButton OperatorButton" onClick={handleButtonClick} />
+
+
+          <CalcButton label={'1'} onClick={handleButtonClick} />
+          <CalcButton label={'2'} onClick={handleButtonClick} />
+          <CalcButton label={'3'} onClick={handleButtonClick} />
+          <CalcButton label={'-'} buttonClassName="CalcButton OperatorButton" onClick={handleButtonClick} />
+
+
+          <CalcButton label={'C'} buttonClassName="CalcButton ClearButton" onClick={handleButtonClick} />
+          <CalcButton label={'0'} onClick={handleButtonClick} />
+          <CalcButton label={'='} buttonClassName="CalcButton EqualsButton" onClick={handleButtonClick} />
+          <CalcButton label={'+'} buttonClassName="CalcButton OperatorButton" onClick={handleButtonClick} />
         </div>
       </div>
     </div>
